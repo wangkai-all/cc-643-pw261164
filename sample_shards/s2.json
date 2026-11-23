@@ -1,0 +1,87 @@
+{
+  "shard_id": "S2",
+  "batch_id": "S2-2026-11-01",
+  "records": [
+    {
+      "record_id": "S2-0001",
+      "store": "A",
+      "sku": "G-001",
+      "qty": 1,
+      "amount": "130.00",
+      "kind": "sale",
+      "ts": "2026-11-03"
+    },
+    {
+      "record_id": "S2-0002",
+      "store": "A",
+      "sku": "G-201",
+      "qty": 1,
+      "amount": "295.00",
+      "kind": "sale",
+      "ts": "2026-11-03"
+    },
+    {
+      "record_id": "S2-0003",
+      "store": "A",
+      "sku": "G-202",
+      "qty": 1,
+      "amount": "285.00",
+      "kind": "sale",
+      "ts": "2026-11-03"
+    },
+    {
+      "record_id": "S2-0004",
+      "store": "A",
+      "sku": "G-203",
+      "qty": 1,
+      "amount": "275.00",
+      "kind": "sale",
+      "ts": "2026-11-03"
+    },
+    {
+      "record_id": "S2-0005",
+      "store": "A",
+      "sku": "G-204",
+      "qty": 1,
+      "amount": "265.00",
+      "kind": "sale",
+      "ts": "2026-11-04"
+    },
+    {
+      "record_id": "S2-0006",
+      "store": "A",
+      "sku": "G-205",
+      "qty": 1,
+      "amount": "255.00",
+      "kind": "sale",
+      "ts": "2026-11-04"
+    },
+    {
+      "record_id": "S2-0007",
+      "store": "B",
+      "sku": "H-004",
+      "qty": 1,
+      "amount": "100.00",
+      "kind": "sale",
+      "ts": "2026-11-03"
+    },
+    {
+      "record_id": "S2-0008",
+      "store": "B",
+      "sku": "H-005",
+      "qty": 1,
+      "amount": "90.00",
+      "kind": "sale",
+      "ts": "2026-11-03"
+    },
+    {
+      "record_id": "S2-0009",
+      "store": "B",
+      "sku": "H-005",
+      "qty": -1,
+      "amount": "-30.00",
+      "kind": "return",
+      "ts": "2026-11-04"
+    }
+  ]
+}

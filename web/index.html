@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>门店商品销售榜</title>
+  <link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">榜</span>
+      <div>
+        <h1>门店商品销售榜</h1>
+        <p id="subtitle" class="muted">明细驱动 · 分片补取 · 版本可追溯</p>
+      </div>
+    </div>
+    <div class="status" id="status" role="status" aria-live="polite">正在加载…</div>
+  </header>
+
+  <main class="layout">
+    <section class="panel span-2" aria-labelledby="board-title">
+      <div class="panel-head">
+        <h2 id="board-title">榜单</h2>
+        <div class="controls">
+          <label>规则
+            <select id="mode">
+              <option value="strict">严格取 N（商品编号破平局）</option>
+              <option value="keep_ties">保留末位同额（可多于 N）</option>
+            </select>
+          </label>
+          <label>N
+            <input id="n" type="number" min="1" max="1000" value="5" inputmode="numeric">
+          </label>
+          <fieldset class="stores" id="stores">
+            <legend>门店</legend>
+          </fieldset>
+          <button id="refresh" class="btn">计算当前榜</button>
+          <button id="publish" class="btn primary">发布为新版本</button>
+        </div>
+      </div>
+      <div id="board" class="board"></div>
+      <div id="compare" class="compare"></div>
+    </section>
+
+    <section class="panel" aria-labelledby="entry-title">
+      <div class="panel-head"><h2 id="entry-title">录入</h2></div>
+      <form id="entry-form" class="form" autocomplete="off">
+        <div class="seg" role="group" aria-label="类型">
+          <label><input type="radio" name="kind" value="sale" checked> 销售</label>
+          <label><input type="radio" name="kind" value="return"> 退货</label>
+          <label><input type="radio" name="kind" value="correction"> 历史更正</label>
+        </div>
+        <label>门店 <input name="store" required placeholder="A"></label>
+        <label>商品编号 <input name="sku" required placeholder="G-001"></label>
+        <div class="row">
+          <label>数量 <input name="qty" type="number" step="1" value="1" required></label>
+          <label>金额 <input name="amount" inputmode="decimal" required placeholder="120.00"></label>
+        </div>
+        <label>归属分片
+          <select name="shard_id" id="shard-select"></select>
+        </label>
+        <label>备注 <input name="note" placeholder="可留空"></label>
+        <button class="btn primary" type="submit">写入明细</button>
+        <p class="hint" id="entry-hint">销售数量为正；退货数量为负（金额可为负）；历史更正用于改错账。</p>
+      </form>
+      <div class="panel-head sub"><h3>删除明细</h3></div>
+      <form id="delete-form" class="form compact">
+        <label>明细编号 <input name="record_id" required placeholder="S1-0001"></label>
+        <button class="btn danger" type="submit">删除</button>
+      </form>
+      <pre id="delete-result" class="note" hidden></pre>
+    </section>
+
+    <section class="panel" aria-labelledby="data-title">
+      <div class="panel-head"><h2 id="data-title">数据与批次</h2></div>
+      <div class="controls wrap">
+        <button id="seed" class="btn">载入演示明细（三份文件）</button>
+        <button id="import" class="btn">导入 sample_shards 全部文件</button>
+      </div>
+      <div id="shards" class="shards"></div>
+      <div id="batches" class="table-wrap"></div>
+    </section>
+
+    <section class="panel span-2" id="explain-panel" aria-labelledby="explain-title">
+      <div class="panel-head">
+        <h2 id="explain-title">分片补取过程</h2>
+        <p class="muted small" id="explain-legend">局部分数、补取数据、停止条件逐轮展开。</p>
+      </div>
+      <div id="explain"></div>
+    </section>
+
+    <section class="panel span-2" aria-labelledby="versions-title">
+      <div class="panel-head">
+        <h2 id="versions-title">版本与对照</h2>
+        <div class="controls">
+          <label>旧版 <select id="before"></select></label>
+          <label>新版 <select id="after"></select></label>
+          <button id="compare-btn" class="btn">对照</button>
+        </div>
+      </div>
+      <div id="versions" class="table-wrap"></div>
+      <div id="version-detail" class="version-detail"></div>
+    </section>
+  </main>
+  <script src="/static/app.js"></script>
+</body>
+</html>
